@@ -3,10 +3,11 @@
     session_start();
     require "config/connection.php";
 
-    // if (isset($_SESSION['logged_in']) && isset($_SESSION['expert_id'])) {
-    //     $expertId = $_SESSION['expert_id'];
-    // }
-    $expertId = 1; //dummy data
+    if (isset($_SESSION['Expert_ID'])) {
+        $expertId = $_SESSION['Expert_ID'];
+    }
+
+    // $expertId = 1; //dummy data
 
     if (isset($_POST["submitprofileupdate"])) {
         // Get form input values

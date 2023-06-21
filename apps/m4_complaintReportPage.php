@@ -1,17 +1,17 @@
 <?php
-    session_start();
-    require "config/connection.php";
+session_start();
+require "config/connection.php";
 
-    if (isset($_SESSION['Admin_ID'])) {
-        $adminId = $_SESSION['Admin_ID'];
-    }
+// if (isset($_SESSION['logged_in']) && isset($_SESSION['admin_id'])) {
+//     $expertId = $_SESSION['admin_id'];
+// }
 
-    // $expertId = 1; //dummy data
-    // $adminId = 1; //dummy data
+$expertId = 1; //dummy data
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,13 +22,14 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/css/module3.css">
 </head>
+
 <body>
 
     <!-- navbar -->
     <nav class="d-flex justify-content-between fixed-top" id="navbarset">
         <div style="display: flex; align-items: center;">
             <div id="logofkedu">
-                <img src="assets/img/logofkedusearch.png" alt="fkedusearch"  id="logoedu">
+                <img src="assets/img/logofkedusearch.png" alt="fkedusearch" id="logoedu">
                 &nbsp;
                 <h6 class="text-dark fw-bolder">FK-EduSearch</h6>
             </div>
@@ -64,9 +65,9 @@
                 <div class="d-flex justify-content-center">
                     <div class="list-group" style="width: 14rem;">
                         <br>
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="expertupdate">EXPERTISE UPDATE</button>
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="assignpost">ASSIGN POST</button>
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="allrating">ALL RATING</button>
+                        <a class="btn btn-primary text-white mb-2" href="./m4_userReportPage.php">USER REPORT</a>
+                        <a class="btn btn-primary text-white mb-2" href="./m4_postReportPage.php">POST REPORT</a>
+                        <a class="btn btn-primary text-white mb-2" href="./m4_complaintReportPage.php">COMPLAINT REPORT</a>
                     </div>
                 </div>
             </div>
@@ -75,22 +76,54 @@
         <!-- content -->
         <div id="maincontentpage">
             <div class="p-2 mb-1 bg-primary text-white">
-                <h5 class="text-uppercase fw-bolder">HOMEPAGE</h5>
+                <h5 class="text-uppercase fw-bolder">COMPLAINT REPORT</h5>
             </div>
             <div class="d-flex align-items-center justify-content-center">
                 <div>
                     <h3 class="fw-bolder">WELCOME TO FK-EduSearch(<em>Knowledge Sharing System</em>)</h3>
                 </div>
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <label for="">Total New Post</label>
+                            </div>
+                            <div class="card-body">
+                                <?php echo $assigncount; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <label for="">Total Answered Post</label>
+                            </div>
+                            <div class="card-body">
+                                <?php echo $answeredcount; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 my-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="chart-container" style="position: relative; left:30%; height:60vh; width:80vw;">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
     <script src="assets/js/javascript.js" defer></script>
     <script src="assets/js/module3js.js" defer></script>
 
-    </body>
+</body>
+
 </html>
-
-

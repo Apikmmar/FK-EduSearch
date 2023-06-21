@@ -2,11 +2,11 @@
     session_start();
     require "config/connection.php";
 
-    // if (isset($_SESSION['logged_in']) && isset($_SESSION['expert_id'])) {
-    //     $expertId = $_SESSION['expert_id'];
-    // }
+    if (isset($_SESSION['Expert_ID'])) {
+        $expertId = $_SESSION['Expert_ID'];
+    }
 
-    $expertId = 1; //dummy data
+    // $expertId = 1; //dummy data
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +114,6 @@
                     <?php echo "<span class='h2 fw-bolder'>Total Rating is $rowCount</span>"; ?>
                     <br>
                     <?php
-                        // Generate rating counts for each range (0-1, 1-2, 2-3, 3-4, 4-5)
                         $ratingCounts = array(0, 0, 0, 0, 0);
                         $sql = "SELECT COUNT(*) AS count, Rating_Val FROM rating WHERE Expert_ID = :expertId GROUP BY Rating_Val";
                         $stmt = $conn->prepare($sql);
