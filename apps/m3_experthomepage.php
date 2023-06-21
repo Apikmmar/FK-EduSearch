@@ -2,11 +2,11 @@
     session_start();
     require "config/connection.php";
 
-    // if (isset($_SESSION['logged_in']) && isset($_SESSION['expert_id'])) {
-    //     $expertId = $_SESSION['expert_id'];
-    // }
+    if (isset($_SESSION['Expert_ID'])) {
+        $expertId = $_SESSION['Expert_ID'];
+    }
 
-    $expertId = 1; //dummy data
+    // $expertId = 1; //dummy data
 ?>
 
 <!DOCTYPE html>

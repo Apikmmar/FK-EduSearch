@@ -1,4 +1,5 @@
-
+<!-- Content -->
+<link rel="stylesheet" href="style.css">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
     <link rel="shortcut icon" href="assets/img/Emblem_of_Universiti_Malaysia_Pahang.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/css/module2.css">
+    <link rel="stylesheet" href="asstes/css/module3.css">
 </head>
 <body>
 
@@ -46,7 +47,6 @@
                 <div class="d-flex justify-content-center">
                     <div class="list-group" style="width: 14rem;">
                         <br>
-                        <!-- <a href="m2_homepage.php"> -->
                         <button class="btn fw-bolder btnusername" id="" onclick="window.location.href='m2_homepage.php';">HOME</button>
                     </div>
                 </div>
@@ -61,69 +61,14 @@
                         <!-- <a href="m2_userReports.php"> -->
                         <button class="btn fw-bolder mb-2 btnusername" id="" name="Reports" onclick="window.location.href='m2_userReports.php';">Reports</button>
                         <!-- <a href="m2_userRating&Feedback.php"> -->
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Rating & Feedback" onclick="window.location.href='m2_userRating&Feedback.php';">Rating & Feedback</button>
+                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Rating & Feedback"onclick="window.location.href='m2_userRating&Feedback.php';">Rating & Feedback</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- content -->
-        <div id="maincontentpage">
-            <div class="p-2 mb-1 bg-primary text-white">
-                <h5 class="text-uppercase fw-bolder">POST STATUS</h5>
-            </div>
-            <div>
-                <div>
-                    <div>
-                        <table class="table table-bordered" align="center">
-                        <thead>
-                            <tr style="background-color: #D3D3D3;">
-                                <th scope="col"style="width: 10px;">Own's Status</th>
-                                <br>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            </tr>
-                        </tbody>
-                        </table>
-                        <br>
-                        <table class="table table-bordered" align="center">
-                        <thead>
-                            <tr style="background-color: #D3D3D3;">
-                                <th scope="col"style="width: 100px;"><label for = "postStatus"> Post Status </label></th>
-                                <form action="/action_page.php">
-                                <br>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <td><textarea id="w3review" name="w3review" rows="4" cols="120">Calculus, susah.
-                            </textarea><input type="submit" value="Update"><input type="submit" value="Delete"></td>
-                            
-                            </tr>
-                        </tbody>
-                        </table>
-                        <br>
-                        <table class="table table-bordered" align="center">
-                        <thead>
-                            <tr style="background-color: #D3D3D3;">
-                                <th scope="col"style="width: 100px;">
-                                <button type="button" class="btn fw-bolder btnusername" id="" ><label for = "Like"> LIKE </label></button></th>
-                                <th scope="col"style="width: 100px;">
-                                <button type="button" class="btn fw-bolder btnusername" id="" ><label for = "Comment"> COMMENT </label></button></th>
-                                <br>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            </tr>
-                        </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        
     </div>
 
     
@@ -133,3 +78,51 @@
 
     </body>
 </html>
+<h4 class="fw-bolder d-flex align-items-center justify-content-center">Complaint Form</h4>
+
+    <!-- Complaint form -->
+    <div class="d-flex align-items-center justify-content-center" id="complaint-form">
+        
+        <form id="complaint-form" action="submit_complaint.php" method="POST">
+            <div class="mb-3">
+                <label for="complaint-id" class="form-label">ID:</label>
+                <input type="text" class="form-control" id="complaint-id" name="complaint-id" required>
+            </div>
+            <div class="mb-3">
+                <label for="complaint-date" class="form-label">Date:</label>
+                <input type="text" class="form-control" id="complaint-date" name="complaint-date" required>
+            </div>
+            <div class="mb-3">
+                <label for="complaint-email" class="form-label">Email:</label>
+                <input type="text" class="form-control" id="complaint-email" name="complaint-email" required>
+            </div>
+            <div class="mb-3">
+                <label for="complaint-password" class="form-label">Password:</label>
+                <input type="text" class="form-control" id="complaint-password" name="complaint-password" required>
+            </div>
+            <div class="mb-3">
+                <label for="complaint-phone-number" class="form-label">Phone Number:</label>
+                <input type="text" class="form-control" id="complaint-phone-number" name="complaint-phone-number" required>
+            </div>
+            <div class="mb-3">
+                <label for="complaint-type-complaint" class="form-label">Type of Complaint:</label>
+                <input type="text" class="form-control" id="complaint-type-complaint" name="complaint-type-complaint" required>
+            </div>
+            <div class="mb-3">
+                <label for="complaint-description" class="form-label">Complaint Desription:</label>
+                <textarea class="form-control" id="complaint-description" name="complaint-description" rows="5" required></textarea>
+            </div>
+
+            <div>    
+                <div id="push-buttons">
+                    <button type="button" class="btn btn-primary" onclick="updateForm()">Update</button>
+                    <button type="button" class="btn btn-secondary mr-2" onclick="resetForm()">Reset</button>
+                    <button type="button" class="btn btn-secondary" onclick="cancelForm()">Cancel</button>
+                </div>
+            </div>
+            
+        </form>
+    
+    </div>
+</div>
+
