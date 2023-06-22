@@ -7,7 +7,7 @@
         $expertId = $_SESSION['Expert_ID'];
     }
 
-    // $expertId = 1; //dummy data
+    $expertId = 1; //dummy data
 
     if (isset($_POST["submitprofileupdate"])) {
         // Get form input values

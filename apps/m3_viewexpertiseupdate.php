@@ -6,9 +6,9 @@
         $adminId = $_SESSION['Admin_ID'];
     }
 
-//     $adminId = 1; //dummy data
-//     $expertId = 1; //dummy data
-// ?>
+    $adminId = 1; //dummy data
+    $expertId = 1; //dummy data
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">

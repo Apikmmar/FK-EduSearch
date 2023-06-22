@@ -6,8 +6,8 @@
         $adminId = $_SESSION['Admin_ID'];
     }
 
-    // $expertId = 1; //dummy data
-    // $adminId = 1; //dummy data
+    $expertId = 1; //dummy data
+    $adminId = 1; //dummy data
 ?>
 
 <!DOCTYPE html>
