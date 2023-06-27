@@ -6,8 +6,14 @@
         $adminId = $_SESSION['Admin_ID'];
     }
 
-    $adminId = 1; //dummy data
+    $adminId = 444; //dummy data
     $expertId = 1; //dummy data
+
+    $stmt = $conn->prepare("SELECT U.User_Name FROM Users U INNER JOIN Admin A ON U.User_ID = A.User_ID WHERE A.User_ID = :adminId");
+    $stmt->bindParam(':adminId', $adminId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $username = $stmt->fetchColumn();
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +44,7 @@
         </div>
         <div style="display: flex; align-items: center;">
             <div>
-                <button type="button" class="btn fw-bolder btnusername" id="">USERNAME</button>
+                <button type="button" class="btn fw-bolder btnusername" style="width: 150px" id=""><?php echo "$username"; ?></button>
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div>

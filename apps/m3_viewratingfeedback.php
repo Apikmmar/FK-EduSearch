@@ -1,12 +1,17 @@
 <?php
     session_start();
     require "config/connection.php";
-
+    
     if (isset($_SESSION['Expert_ID'])) {
         $expertId = $_SESSION['Expert_ID'];
     }
-
+    
     $expertId = 1; //dummy data
+    $stmt = $conn->prepare("SELECT U.User_Name FROM Users U INNER JOIN Expert E ON U.User_ID = E.User_ID WHERE E.User_ID = :expertId");
+    $stmt->bindParam(':expertId', $expertId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $username = $stmt->fetchColumn();
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +42,7 @@
         </div>
         <div style="display: flex; align-items: center;">
             <div>
-                <button type="button" class="btn fw-bolder btnusername" id="">USERNAME</button>
+                <button type="button" class="btn fw-bolder btnusername" style="width: 150px" id=""><?php echo "$username"; ?></button>
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div>
@@ -128,12 +133,15 @@
                             foreach ($results as $row) {
                                 $ratingFeedback = $row['Rating_Feedback'];
                                 $userName = $row['User_Name'];
+                            ?>
 
-                                echo '<div id="feedbackbox">';
-                                echo '<p>' . $ratingFeedback . '</p>';
-                                echo '<p style="float: right; padding-right: 10px;">FROM USER ' . $userName . '</p>';
-                                echo '</div>';
+                            <div id="feedbackbox">
+                                <p> <?php echo $ratingFeedback; ?> </p>
+                                <p style="float: right; padding-right: 10px;">FROM USER <?php echo $userName; ?> </p>
+                            </div>
+                            <br>
 
+                            <?php
                                 $counter++;
 
                                 if ($counter === 3) {

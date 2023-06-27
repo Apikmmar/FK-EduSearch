@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2023 at 05:41 AM
+-- Generation Time: Jun 27, 2023 at 08:03 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,6 +33,13 @@ CREATE TABLE `admin` (
   `User_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`Admin_ID`, `Admin_Status`, `User_ID`) VALUES
+('1234', 'active', 444);
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +55,15 @@ CREATE TABLE `complaint` (
   `Complaint_Status` varchar(10) NOT NULL,
   `User_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `complaint`
+--
+
+INSERT INTO `complaint` (`Complaint_ID`, `Complaint_Type`, `Complaint_Description`, `Complaint_DateSubmit`, `Complaint_DateResolve`, `Complaint_Status`, `User_ID`) VALUES
+(0, 'Unsatisfied Expert’s', 'DFH', '2023-06-09', '0000-00-00', 'In Investi', NULL),
+(2, '2', '2', '0000-00-00', '0000-00-00', '2', 2),
+(7, '7', '7', '2023-05-19', '0000-00-00', '', 2);
 
 -- --------------------------------------------------------
 
@@ -71,7 +87,7 @@ CREATE TABLE `expert` (
 --
 
 INSERT INTO `expert` (`Expert_ID`, `Expert_Age`, `Expert_Address`, `Expert_HP`, `Expert_CV_FilePath`, `Expert_Status`, `Expert_LastInteractionDate`, `User_ID`) VALUES
-('1', 1, '1', 1, 'm3_allrating.php', '1', '2023-06-14', 1),
+('1', 33, '1', 1, '', '1', '2023-06-14', 1),
 ('2', 2, '2', 2, '2', '2', '2023-06-05', 2);
 
 -- --------------------------------------------------------
@@ -95,9 +111,9 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`Post_ID`, `Post_Title`, `Post_Description`, `Post_AssignDate`, `Post_ExpiryDate`, `Post_Status`, `Expert_ID`) VALUES
-('2', '2', '2', '2023-06-09', '2023-06-03', 'Post Assign', '1'),
-('3', '3', '3', '2023-06-09', '2023-06-17', 'Post Assign', '1'),
-('4', '4', '4', '0000-00-00', '0000-00-00', 'Post Assign', '1');
+('5', 'Big Data', 'WHAT IS BIG DATA', '2023-06-15', '2023-06-16', 'Post Assign', '1'),
+('6', 'ETHEREUM', 'Proof Of Work?', '2023-06-17', '2023-06-18', 'Post Assign', '1'),
+('66', '66', '66', '2023-06-21', '2023-06-16', 'Post Assign', '1');
 
 -- --------------------------------------------------------
 
@@ -113,6 +129,13 @@ CREATE TABLE `postanswer` (
   `Expert_ID` varchar(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `postanswer`
+--
+
+INSERT INTO `postanswer` (`PA_ID`, `PA_Title`, `PA_Desc`, `Post_ID`, `Expert_ID`) VALUES
+(710, '123456789', '`12456789', NULL, '1');
+
 -- --------------------------------------------------------
 
 --
@@ -122,7 +145,7 @@ CREATE TABLE `postanswer` (
 CREATE TABLE `publication` (
   `Publication_ID` int(10) NOT NULL,
   `Publication_Title` varchar(30) NOT NULL,
-  `Publication_Date` varchar(255) NOT NULL,
+  `Publication_Date` date NOT NULL,
   `Expert_ID` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -131,9 +154,11 @@ CREATE TABLE `publication` (
 --
 
 INSERT INTO `publication` (`Publication_ID`, `Publication_Title`, `Publication_Date`, `Expert_ID`) VALUES
-(5, '11', '11', '1'),
-(6, '11', '1111', '1'),
-(7, 'WHAT IS BITCOIN', '1', '1');
+(8, 'www', '2023-06-15', '1'),
+(9, '34', '2022-12-07', '1'),
+(10, 'ADSDEFWGW4H6J4RWEQQ', '2023-06-09', '1'),
+(11, '11', '2023-06-15', '1'),
+(12, 'aaaaa', '2023-06-29', '1');
 
 -- --------------------------------------------------------
 
@@ -150,6 +175,14 @@ CREATE TABLE `rating` (
   `Post_ID` varchar(10) DEFAULT NULL,
   `Expert_ID` varchar(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rating`
+--
+
+INSERT INTO `rating` (`Rating_ID`, `Rating_Val`, `Rating_Feedback`, `Rating_Date`, `User_ID`, `Post_ID`, `Expert_ID`) VALUES
+(1, 1, '1', '2023-06-23', 2, '5', '1'),
+(3, 3, '3', '2023-06-08', 2, '66', '1');
 
 -- --------------------------------------------------------
 
@@ -208,7 +241,8 @@ INSERT INTO `socmedacc` (`SMA_ID`, `SMA_AccType`, `SMA_Username`, `Expert_ID`) V
 (2, '2', '2', '1'),
 (3, '3', '3', '1'),
 (4, '11', '11', '1'),
-(5, '1111', '1111', '1');
+(5, '1111', '1111', '1'),
+(6, 'asdf', '1111', '1');
 
 -- --------------------------------------------------------
 
@@ -221,16 +255,18 @@ CREATE TABLE `users` (
   `User_Name` varchar(30) NOT NULL,
   `User_Password` varchar(10) NOT NULL,
   `User_Email` varchar(20) NOT NULL,
-  `User_HP` int(11) NOT NULL
+  `User_HP` int(11) NOT NULL,
+  `Role` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`User_ID`, `User_Name`, `User_Password`, `User_Email`, `User_HP`) VALUES
-(1, '1', '1', '1', 1),
-(2, '2', '2', '2', 2);
+INSERT INTO `users` (`User_ID`, `User_Name`, `User_Password`, `User_Email`, `User_HP`, `Role`) VALUES
+(1, 'expert', '1', '1', 1, ''),
+(2, '2', '2', '2', 2, ''),
+(444, 'admin', 'admin', 'admin@gmail.com', 1234, 'admin');
 
 --
 -- Indexes for dumped tables
@@ -324,13 +360,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `postanswer`
 --
 ALTER TABLE `postanswer`
-  MODIFY `PA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=708;
+  MODIFY `PA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=711;
 
 --
 -- AUTO_INCREMENT for table `publication`
 --
 ALTER TABLE `publication`
-  MODIFY `Publication_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Publication_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `rating`
@@ -342,13 +378,13 @@ ALTER TABLE `rating`
 -- AUTO_INCREMENT for table `socmedacc`
 --
 ALTER TABLE `socmedacc`
-  MODIFY `SMA_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `SMA_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=445;
 
 --
 -- Constraints for dumped tables

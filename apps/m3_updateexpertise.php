@@ -1,4 +1,5 @@
 <!-- FUNCTION BUT HAVE PROBLEM -->
+<!-- DELETE NOT FUNCTON -->
 <?php
     session_start();
     require "config/connection.php";
@@ -8,6 +9,11 @@
     }
 
     $expertId = 1; //dummy data
+    $stmt = $conn->prepare("SELECT U.User_Name FROM Users U INNER JOIN Expert E ON U.User_ID = E.User_ID WHERE E.User_ID = :expertId");
+    $stmt->bindParam(':expertId', $expertId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $username = $stmt->fetchColumn();
 
     if (isset($_POST["submitprofileupdate"])) {
         // Get form input values
@@ -85,9 +91,9 @@
         $publicationId = $_POST["Publication_ID"];
     
         // Delete publication query
-        $deleteStmt = $conn->prepare("DELETE FROM publication WHERE Publication_ID = :publicationId AND Expert_ID = :expertid");
+        $deleteStmt = $conn->prepare("DELETE FROM publication WHERE Publication_ID = :publicationId AND Expert_ID = :expertId");
         $deleteStmt->bindParam(':publicationId', $publicationId);
-        $deleteStmt->bindParam(':expertid', $expertId);
+        $deleteStmt->bindParam(':expertId', $expertId);
         
         if ($deleteStmt->execute()) {
             echo "<script>alert('Publication deleted');window.location.href='m3_updateexpertise.php';</script>";
@@ -139,7 +145,7 @@
         </div>
         <div style="display: flex; align-items: center;">
             <div>
-                <button type="button" class="btn fw-bolder btnusername" id="">USERNAME</button>
+                <button type="button" class="btn fw-bolder btnusername" style="width: 150px" id=""><?php echo "$username"; ?></button>
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div>
