@@ -99,7 +99,8 @@
                         <tbody>
                             <tr>
                             <td><textarea id="w3review" name="w3review" rows="4" cols="120">Calculus, susah.
-                            </textarea></td>
+                            </textarea><input type="submit" value="Update"><input type="submit" value="Delete"></td>
+                            
                             </tr>
                         </tbody>
                         </table>

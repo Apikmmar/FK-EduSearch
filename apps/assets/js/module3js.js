@@ -32,8 +32,16 @@ $(document).ready(function() {
         window.location.href = "m3_viewrating.php";
     });
 
+    $(document).on("click", "[name='gotovisualpublication']", function() {
+        window.location.href = "m3_viewpublication.php";
+    })
+
     // ADMIN JQUERY FUNCTION
     // side navbar
+    $(document).on("click", "[name='adminhome']", function() {
+        window.location.href = "m3_adminhomepage.php";
+    });
+
     $(document).on("click", "[name='expertupdate']", function() {
         window.location.href = "m3_expertiseupdate.php";
     });

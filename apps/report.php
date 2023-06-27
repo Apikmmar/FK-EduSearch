@@ -1,18 +1,5 @@
-<<<<<<<< HEAD:apps/m2_homepage.php
-========
-<?php
-    session_start();
-    require "config/connection.php";
-
-    if (isset($_SESSION['Admin_ID'])) {
-        $adminId = $_SESSION['Admin_ID'];
-    }
-
-    $expertId = 1; //dummy data
-    $adminId = 1; //dummy data
-?>
->>>>>>>> eaf0b110e4db25ac6675b0d449e9935aae58fa2b:apps/m3_adminhomepage.php
-
+<!-- Content -->
+<link rel="stylesheet" href="style.css">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +10,7 @@
     <link rel="shortcut icon" href="assets/img/Emblem_of_Universiti_Malaysia_Pahang.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/css/module2.css">
+    <link rel="stylesheet" href="asstes/css/module3.css">
 </head>
 <body>
 
@@ -60,11 +47,7 @@
                 <div class="d-flex justify-content-center">
                     <div class="list-group" style="width: 14rem;">
                         <br>
-<<<<<<<< HEAD:apps/m2_homepage.php
                         <button class="btn fw-bolder btnusername" id="" onclick="window.location.href='m2_homepage.php';">HOME</button>
-========
-                        <button class="btn fw-bolder btnusername" name="adminhome">HOME</button>
->>>>>>>> eaf0b110e4db25ac6675b0d449e9935aae58fa2b:apps/m3_adminhomepage.php
                     </div>
                 </div>
                 <br><br>
@@ -84,17 +67,8 @@
             </div>
         </div>
 
-        <!-- content -->
-        <div id="maincontentpage">
-            <div class="p-2 mb-1 bg-primary text-white">
-                <h5 class="text-uppercase fw-bolder">HOMEPAGE</h5>
-            </div>
-            <div class="d-flex align-items-center justify-content-center">
-                <div>
-                    <h3 class="fw-bolder">WELCOME TO FK-EduSearch(<em>Knowledge Sharing System</em>)</h3>
-                </div>
-            </div>
-        </div>
+        
+        
     </div>
 
     
@@ -103,6 +77,98 @@
     <script src="assets/js/module3js.js" defer></script>
 
     </body>
-</html>
+</html><style>
+    #graphModule1 {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+</style>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "edusearch";
 
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Retrieve the data from the database
+    $sql = 'SELECT COUNT(*) AS total_users FROM User';
+    $result = $conn->query($sql);
+    $totalUsers = ($result && $result->num_rows > 0) ? $result->fetch_assoc()['total_users'] : 0;
+
+    $sql = 'SELECT COUNT(*) AS total_experts FROM Expert';
+    $result = $conn->query($sql);
+    $totalExperts = ($result && $result->num_rows > 0) ? $result->fetch_assoc()['total_experts'] : 0;
+
+    // Close the database connection
+    $conn->close();
+    ?>
+
+    var totalUsers = <?php echo $totalUsers; ?>;
+    var totalExperts = <?php echo $totalExperts; ?>;
+
+    var userGraphCanvas = document.getElementById('graphModule1');
+
+    var userGraph = new Chart(userGraphCanvas, {
+        type: 'bar',
+        data: {
+            labels: ['Total Users', 'Total Experts'],
+            datasets: [{
+                label: 'Number of Users',
+                data: [totalUsers, totalExperts],
+                backgroundColor: ['#36a2eb', '#ff6384'],
+                borderColor: ['#36a2eb', '#ff6384'],
+                borderWidth: 1,
+                barThickness: 50
+            }]
+        },
+        options: {
+            responsive: true,
+            aspectRatio: 1.5,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        drawBorder: false
+                    },
+                    ticks: {
+                        precision: 0
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 10,
+                    top: 10,
+                    bottom: 10
+                }
+            },
+            categorySpacing: 0.2
+        }
+    });
+</script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

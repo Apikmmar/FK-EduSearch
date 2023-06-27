@@ -1,17 +1,13 @@
-<<<<<<<< HEAD:apps/m2_homepage.php
-========
 <?php
     session_start();
     require "config/connection.php";
 
-    if (isset($_SESSION['Admin_ID'])) {
-        $adminId = $_SESSION['Admin_ID'];
+    if (isset($_SESSION['Expert_ID'])) {
+        $expertId = $_SESSION['Expert_ID'];
     }
 
     $expertId = 1; //dummy data
-    $adminId = 1; //dummy data
 ?>
->>>>>>>> eaf0b110e4db25ac6675b0d449e9935aae58fa2b:apps/m3_adminhomepage.php
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +19,7 @@
     <link rel="shortcut icon" href="assets/img/Emblem_of_Universiti_Malaysia_Pahang.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/css/module2.css">
+    <link rel="stylesheet" href="assets/css/module3.css">
 </head>
 <body>
 
@@ -41,7 +37,7 @@
         </div>
         <div style="display: flex; align-items: center;">
             <div>
-                <button type="button" class="btn fw-bolder btnusername" id="">USERNAME</button>
+                <button type="button" class="btn fw-bolder btnusername" id="experthomebutton">USERNAME</button>
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div>
@@ -60,25 +56,16 @@
                 <div class="d-flex justify-content-center">
                     <div class="list-group" style="width: 14rem;">
                         <br>
-<<<<<<<< HEAD:apps/m2_homepage.php
-                        <button class="btn fw-bolder btnusername" id="" onclick="window.location.href='m2_homepage.php';">HOME</button>
-========
-                        <button class="btn fw-bolder btnusername" name="adminhome">HOME</button>
->>>>>>>> eaf0b110e4db25ac6675b0d449e9935aae58fa2b:apps/m3_adminhomepage.php
+                        <button class="btn fw-bolder btnusername" id="">HOME</button>
                     </div>
                 </div>
                 <br><br>
                 <div class="d-flex justify-content-center">
                     <div class="list-group" style="width: 14rem;">
                         <br>
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Profile">Profile</button>
-                        <br>
-                        <!-- <a href="m2_userDiscussionBoard.php"> -->
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Discussion Board" onclick="window.location.href='m2_userDiscussionBoard.php';">Discussion Board</button>
-                        <!-- <a href="m2_userReports.php"> -->
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Reports" onclick="window.location.href='m2_userReports.php';">Reports</button>
-                        <!-- <a href="m2_userRating&Feedback.php"> -->
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Rating & Feedback"onclick="window.location.href='m2_userRating&Feedback.php';">Rating & Feedback</button>
+                        <button class="btn fw-bolder mb-2 btnusername" id="" name="updateexpertise">UPDATE EXPERTISE</button>
+                        <button class="btn fw-bolder mb-2 btnusername" id="" name="managepost">MANAGE POST</button>
+                        <button class="btn fw-bolder mb-2 btnusername" id="" name="myrating">MY RATING</button>
                     </div>
                 </div>
             </div>
@@ -86,23 +73,44 @@
 
         <!-- content -->
         <div id="maincontentpage">
-            <div class="p-2 mb-1 bg-primary text-white">
-                <h5 class="text-uppercase fw-bolder">HOMEPAGE</h5>
+            <div class="d-flex p-2 mb-1 bg-primary text-white">
+                <button class="btn btn-transparent btn-sm" name="myrating">
+                    <img src="assets/img/return.png" alt="back" style="width: 30px;">
+                </button>
+                <h5 class="text-uppercase fw-bolder" style="margin-top:5px;">ALL FEEDBACK</h5>
             </div>
-            <div class="d-flex align-items-center justify-content-center">
-                <div>
-                    <h3 class="fw-bolder">WELCOME TO FK-EduSearch(<em>Knowledge Sharing System</em>)</h3>
+            <?php
+                $sql = "SELECT R.Rating_Feedback, U.User_Name FROM rating R
+                        JOIN users U ON R.User_ID = U.User_ID
+                        WHERE R.Expert_ID = :expert_id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':expert_id', $expertId, PDO::PARAM_INT);
+                $stmt->execute();
+
+                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($results as $row) {
+                    $ratingFeedback = $row['Rating_Feedback'];
+                    $userName = $row['User_Name'];
+            ?>
+            <div style='padding: 20px 0px 0px 40px'>
+                <div id='feedbackbox'>
+                    <p><?php echo $ratingFeedback; ?></p>
+                    <p style='float: right; padding-right: 10px;'>FROM USER <?php echo $userName; ?></p>
                 </div>
+                <br><br>
             </div>
+        <?php
+                }
+        ?>
         </div>
     </div>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
     <script src="assets/js/javascript.js" defer></script>
     <script src="assets/js/module3js.js" defer></script>
 
-    </body>
+</body>
 </html>
-
-

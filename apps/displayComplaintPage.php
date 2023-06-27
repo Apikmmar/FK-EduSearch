@@ -1,4 +1,5 @@
-
+<!-- Content -->
+<link rel="stylesheet" href="style.css">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,10 @@
     <link rel="shortcut icon" href="assets/img/Emblem_of_Universiti_Malaysia_Pahang.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/css/module2.css">
+    <link rel="stylesheet" href="asstes/css/module3.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="assets/js/javascript.js" defer></script>
+    <script src="assets/js/module3js.js" defer></script>
 </head>
 <body>
 
@@ -46,8 +50,7 @@
                 <div class="d-flex justify-content-center">
                     <div class="list-group" style="width: 14rem;">
                         <br>
-                        <!-- <a href="m2_homepage.php"> -->
-                        <button class="btn fw-bolder btnusername" id=""onclick="window.location.href='m2_homepage.php';">HOME</button>
+                        <button class="btn fw-bolder btnusername" id="" onclick="window.location.href='m2_homepage.php';">HOME</button>
                     </div>
                 </div>
                 <br><br>
@@ -59,61 +62,83 @@
                         <!-- <a href="m2_userDiscussionBoard.php"> -->
                         <button class="btn fw-bolder mb-2 btnusername" id="" name="Discussion Board" onclick="window.location.href='m2_userDiscussionBoard.php';">Discussion Board</button>
                         <!-- <a href="m2_userReports.php"> -->
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Reports"onclick="window.location.href='m2_userReport.php';">Reports</button>
+                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Reports" onclick="window.location.href='m2_userReports.php';">Reports</button>
                         <!-- <a href="m2_userRating&Feedback.php"> -->
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Rating & Feedback" onclick="window.location.href='m2_userRating&Feedback.php';">Rating & Feedback</button>
+                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Rating & Feedback"onclick="window.location.href='m2_userRating&Feedback.php';">Rating & Feedback</button>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- content -->
-        <div id="maincontentpage">
-            <div class="p-2 mb-1 bg-primary text-white">
-                <h5 class="text-uppercase fw-bolder">RATING & FEEDBACK</h5>
-            </div>
-            <div class="d-flex align-items-left justify-content-left">
-                <div>
-                <div class="list-group" style="width: 14rem;">
-                        <br>
-            <div style="padding: 20px 0px 0px 40px">
-                <div>
-                    <form action="feedback_process.php" method="post">
-                    <h5 class="fw-bolder" ><label for = "yourRating"> YOUR RATING </label></h5>
-                    <div class="d-flex">
-                        <div id="ratebox" ><textarea  style="border: 0px solid ; background-color:rgb(228, 221, 198); font-size:30px;" id="w3review" name="w3review" rows="1" cols="4">
-                            </textarea>
-                            <span class="h1 fw-bolder" ><p></p></span>
-                        </div>
-                        &nbsp;&nbsp;&nbsp;
-                        <img src="assets/img/Starz.png" alt="star" id="starshow">
-                    </div>
-                </div>
-                <br>
-                <div>
-                    <br>
-                    <br>
-                    <h5> <label for = "feedBack"> FEEDBACK </label>
-                    <input type="text" class="form-control" id="feedBack" name="feedBack" />
-                </h5>
-                            <br>
-                            <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </div>
-        </div>
+        </div>    
     </div>
 
-                        </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php
+try {
+    require './db_connection.php';
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
-    <script src="assets/js/javascript.js" defer></script>
-    <script src="assets/js/module3js.js" defer></script>
+    // Retrieve the complaints from the database
+    $stmt = $conn->prepare('SELECT * FROM complaint');
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    </body>
+    // Check if there are any complaints
+    if ($result->num_rows > 0) {
+        echo '<h4>Complaints</h4>';
+        echo '<table class="complaint-table">';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th>ID</th>';
+        echo '<th>Type</th>';
+        echo '<th>Description</th>';
+        echo '<th>Date</th>';
+        echo '<th>Status</th>';
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
+        
+        // Loop through each complaint and display the details
+        while ($row = $result->fetch_assoc()) {
+            echo '<tr>';
+            echo '<td>' . $row['Complaint_ID'] . '</td>';
+            echo '<td>' . $row['Complaint_Type'] . '</td>';
+            echo '<td>' . $row['Complaint_Description'] . '</td>';
+            echo '<td>' . $row['Complaint_DateSubmit'] . '</td>';
+            echo '<td>' . $row['Complaint_Status'] . '</td>';
+            echo '</tr>';
+        }
+        
+        echo '</tbody>';
+        echo '</table>';
+    } else {
+        echo 'No complaints found.';
+    }
+
+    // Close the statement and the database connection
+    $stmt->close();
+    $conn->close();
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
+?>
+
+<style>
+    .complaint-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .complaint-table th,
+    .complaint-table td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .complaint-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+</style>
+
+
+</body>
 </html>

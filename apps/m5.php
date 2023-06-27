@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,13 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FK-EduSearch</title>
-    <link rel="shortcut icon" href="assets/img/Emblem_of_Universiti_Malaysia_Pahang.png" type="image/png">
+    <link rel="shortcut icon" href="img/Emblem_of_Universiti_Malaysia_Pahang.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/css/module2.css">
+    <link rel="stylesheet" href="asstes/css/module3.css">
 </head>
 <body>
-
     <!-- navbar -->
     <nav class="d-flex justify-content-between fixed-top" id="navbarset">
         <div style="display: flex; align-items: center;">
@@ -46,8 +44,7 @@
                 <div class="d-flex justify-content-center">
                     <div class="list-group" style="width: 14rem;">
                         <br>
-                        <!-- <a href="m2_homepage.php"> -->
-                        <button class="btn fw-bolder btnusername" id=""onclick="window.location.href='m2_homepage.php';">HOME</button>
+                        <button class="btn fw-bolder btnusername" id="" onclick="window.location.href='m2_homepage.php';">HOME</button>
                     </div>
                 </div>
                 <br><br>
@@ -59,61 +56,49 @@
                         <!-- <a href="m2_userDiscussionBoard.php"> -->
                         <button class="btn fw-bolder mb-2 btnusername" id="" name="Discussion Board" onclick="window.location.href='m2_userDiscussionBoard.php';">Discussion Board</button>
                         <!-- <a href="m2_userReports.php"> -->
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Reports"onclick="window.location.href='m2_userReport.php';">Reports</button>
+                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Reports" onclick="window.location.href='m2_userReports.php';">Reports</button>
                         <!-- <a href="m2_userRating&Feedback.php"> -->
-                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Rating & Feedback" onclick="window.location.href='m2_userRating&Feedback.php';">Rating & Feedback</button>
+                        <button class="btn fw-bolder mb-2 btnusername" id="" name="Rating & Feedback"onclick="window.location.href='m2_userRating&Feedback.php';">Rating & Feedback</button>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- content -->
-        <div id="maincontentpage">
-            <div class="p-2 mb-1 bg-primary text-white">
-                <h5 class="text-uppercase fw-bolder">RATING & FEEDBACK</h5>
-            </div>
-            <div class="d-flex align-items-left justify-content-left">
-                <div>
-                <div class="list-group" style="width: 14rem;">
-                        <br>
-            <div style="padding: 20px 0px 0px 40px">
-                <div>
-                    <form action="feedback_process.php" method="post">
-                    <h5 class="fw-bolder" ><label for = "yourRating"> YOUR RATING </label></h5>
-                    <div class="d-flex">
-                        <div id="ratebox" ><textarea  style="border: 0px solid ; background-color:rgb(228, 221, 198); font-size:30px;" id="w3review" name="w3review" rows="1" cols="4">
-                            </textarea>
-                            <span class="h1 fw-bolder" ><p></p></span>
-                        </div>
-                        &nbsp;&nbsp;&nbsp;
-                        <img src="assets/img/Starz.png" alt="star" id="starshow">
-                    </div>
-                </div>
-                <br>
-                <div>
-                    <br>
-                    <br>
-                    <h5> <label for = "feedBack"> FEEDBACK </label>
-                    <input type="text" class="form-control" id="feedBack" name="feedBack" />
-                </h5>
-                            <br>
-                            <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </div>
-        </div>
+        </div>  
     </div>
 
-                        </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
     <script src="assets/js/javascript.js" defer></script>
     <script src="assets/js/module3js.js" defer></script>
 
-    </body>
+    <h4 class="fw-bolder d-flex align-items-center justify-content-center">Complaint Form</h4>
+    <!-- Complaint form -->
+    <div class="d-flex align-items-center justify-content-center" id="complaint-form">
+    <form id="complaint-form" action="submit_complaint.php" method="POST">
+        <div class="mb-3">
+            <label for="complaint-type" class="form-label">Type of Complaint:</label>
+            <select class="form-control" id="complaint-type" name="complaint_type" required>
+                <option value="Unsatisfied Expert’s Feedback">Unsatisfied Expert’s Feedback</option>
+                <option value="Wrongly Assigned Research Area">Wrongly Assigned Research Area</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="complaint-description" class="form-label">Complaint Description:</label>
+            <textarea class="form-control" id="complaint-description" name="complaint_description" rows="5" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="complaint-date" class="form-label">Date of Complaint:</label>
+            <input type="date" class="form-control" id="complaint-date" name="complaint_dateSubmit" required>
+        </div>
+        <div class="mb-3">
+            <label for="complaint-status" class="form-label">Complaint Status:</label>
+            <select class="form-control" id="complaint-status" name="complaint_status" required>
+                <option value="In Investigation">In Investigation</option>
+                <option value="On Hold">On Hold</option>
+                <option value="Resolved">Resolved</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" name="create">Submit</button>
+    </form>
+</div>
+</body>
 </html>
