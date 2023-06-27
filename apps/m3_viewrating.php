@@ -7,6 +7,11 @@
     }
 
     $expertId = 1; //dummy data
+    $stmt = $conn->prepare("SELECT U.User_Name FROM Users U INNER JOIN Expert E ON U.User_ID = E.User_ID WHERE E.User_ID = :expertId");
+    $stmt->bindParam(':expertId', $expertId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $username = $stmt->fetchColumn();
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +42,7 @@
         </div>
         <div style="display: flex; align-items: center;">
             <div>
-                <button type="button" class="btn fw-bolder btnusername" id="">USERNAME</button>
+                <button type="button" class="btn fw-bolder btnusername" style="width: 150px" id=""><?php echo "$username"; ?></button>
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div>
