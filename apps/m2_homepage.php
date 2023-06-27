@@ -1,3 +1,17 @@
+<<<<<<<< HEAD:apps/m2_homepage.php
+========
+<?php
+    session_start();
+    require "config/connection.php";
+
+    if (isset($_SESSION['Admin_ID'])) {
+        $adminId = $_SESSION['Admin_ID'];
+    }
+
+    $expertId = 1; //dummy data
+    $adminId = 1; //dummy data
+?>
+>>>>>>>> eaf0b110e4db25ac6675b0d449e9935aae58fa2b:apps/m3_adminhomepage.php
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +60,11 @@
                 <div class="d-flex justify-content-center">
                     <div class="list-group" style="width: 14rem;">
                         <br>
+<<<<<<<< HEAD:apps/m2_homepage.php
                         <button class="btn fw-bolder btnusername" id="" onclick="window.location.href='m2_homepage.php';">HOME</button>
+========
+                        <button class="btn fw-bolder btnusername" name="adminhome">HOME</button>
+>>>>>>>> eaf0b110e4db25ac6675b0d449e9935aae58fa2b:apps/m3_adminhomepage.php
                     </div>
                 </div>
                 <br><br>
