@@ -1,16 +1,6 @@
-<?php
-    session_start();
-    require "config/connection.php";
-
-    // if (isset($_SESSION['logged_in']) && isset($_SESSION['expert_id'])) {
-    //     $expertId = $_SESSION['expert_id'];
-    // }
-    
-    $expertId = 1; //dummy data
-?>
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Admin Login</title>
     <style>
@@ -65,24 +55,50 @@
             color: red;
             margin-top: 10px;
         }
+
+        button[type="button"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 16px;
+            margin-top: 10px;
+            /* Add top padding */
+        }
+
+        button[type="button"]:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Admin Login</h2>
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <form method="post" action="adminLogin.php">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <input type="submit" value="Login">
+            <button type="button" onclick="submitForm()">Login</button>
 
-            <?php if (isset($loginError)): ?>
+            <?php if (isset($loginError)) : ?>
                 <div class="error"><?php echo $loginError; ?></div>
             <?php endif; ?>
         </form>
     </div>
+
+    <script>
+        function submitForm() {
+            // Add your logic here to handle form submission
+            document.forms[0].submit();
+        }
+    </script>
 </body>
+
 </html>
